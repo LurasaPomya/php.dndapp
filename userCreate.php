@@ -15,7 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
   $password = password_hash($password, PASSWORD_DEFAULT);
 
-  $stmt = $conn->prepare("INSERT INTO users (username,password,level) VALUES (:username,:password,:level)");
+  $stmt = $conn->prepare("INSERT INTO users (username,php_password,level) VALUES (:username,:password,:level)");
   $stmt->bindParam(':username',$username);
   $stmt->bindParam(':password',$password);
   $stmt->bindParam(':level',$level);

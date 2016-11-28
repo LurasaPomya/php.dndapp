@@ -14,8 +14,9 @@ if ($_POST['submitted'] == "true") {
 		$stmt->execute();
 		//Grabs the username and password, these will be empty if nothing matched.
 		while ($row = $stmt->fetch()) {
-			$sqlPassword = $row['password'];
-			$accessLevel = $row['level'];
+			$sqlPassword = $row['php_password'];
+			$is_admin = $row['is_admin'];
+			$is_verified = $row['is_verified'];
 			$userId = $row['_id'];
 		}
 	} catch(PDOException $e) {
@@ -36,6 +37,12 @@ if ($_POST['submitted'] == "true") {
 		
 		$_SESSION['username'] = $username;
 		$_SESSION['login_time'] = $time;
+		if ($is_admin) {
+			$accessLevel = 3;
+		}
+		else {
+			$accessLevel = 0;
+		}
 		$_SESSION['level'] = $accessLevel;
 		$_SESSION['userId'] = $userId;
 		
